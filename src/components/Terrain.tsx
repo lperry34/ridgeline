@@ -57,6 +57,7 @@ export default function Terrain({
   const viewerRef = useRef<{ cesiumElement: CesiumViewer }>(null);
   const geocoderRef = useRef<IonGeocoderService | null>(null);
   const [waypoints, setWaypoints] = useState<Cartesian3[]>([]);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     onHasWaypointsChange?.(waypoints.length > 0);
@@ -103,7 +104,29 @@ export default function Terrain({
     canvas.style.cursor = isDrawing ? 'crosshair' : 'default';
   }, [isDrawing]);
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      const viewer = viewerRef.current?.cesiumElement;
+      if (!viewer?.scene) return;
+      clearInterval(id);
+      const remove = viewer.scene.postRender.addEventListener(() => {
+        remove();
+        setIsReady(true);
+      });
+    }, 50);
+    return () => clearInterval(id);
+  }, []);
+
   return (
+    <div className="relative w-full h-full">
+      {!isReady && (
+        <div
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 bg-[#0f0f0f]"
+        >
+          <div className="terrain-loader" />
+          <span className="text-sm text-white/60">Loading map…</span>
+        </div>
+      )}
     <Viewer 
       full
       terrainProvider={terrainProvider}
@@ -116,13 +139,14 @@ export default function Terrain({
       baseLayerPicker={false}
       geocoder={false}
       homeButton={false}
+      navigationHelpButton={false}
     >
       <CameraFlyTo 
-        destination={Cartesian3.fromDegrees(-110.64022518601037, 43.69587558257803, 3365.3129589096966)} 
+        destination={Cartesian3.fromDegrees(-110.677462579855, 43.70590037055092, 3468.985505525682)} 
         duration={3} 
         orientation={{
-          heading: 5.04771089290971,
-          pitch: -0.0885417338984622,
+          heading: 5.047448444886122,
+          pitch: -0.09812921167794131,
           roll: 0
         }}
         once={true}
@@ -163,5 +187,6 @@ export default function Terrain({
         </Entity>
       )}
     </Viewer>
+    </div>
   )
 }

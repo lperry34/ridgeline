@@ -54,15 +54,30 @@
 }
 
 .sidebar h1,
-.app-header h1 {
+.app-header h1,
+.app-top-bar h1 {
   font-family: "Graphik", sans-serif;
-}
-
-.sidebar-top {
-  padding: 1rem;
-  border-bottom: 1px solid #fff3;
 }
 
 .sidebar-content {
   padding: 1rem;
+}
+
+.bring-up-1 {
+  margin-top: -1px;
+}
+
+.terrain-loader {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: terrain-loader-spin 0.8s linear infinite;
+}
+
+@keyframes terrain-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
