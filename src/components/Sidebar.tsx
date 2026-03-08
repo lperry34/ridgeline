@@ -117,7 +117,7 @@ export default function Sidebar({
           />
         )}
         <h1 onClick={() => window.location.reload()} className="cursor-pointer absolute left-1/2 -translate-x-1/2 text-xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
-          <img src="/mountain.svg" className="h-[1.2rem] w-auto inline-block align-baseline bring-up-1" />
+          <img src="/mountain.svg" className="h-[1.2rem] w-auto" />
           Ridgeline
         </h1>
       </header>
