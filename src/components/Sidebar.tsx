@@ -116,7 +116,7 @@ export default function Sidebar({
             onClick={closeSidebarOnMobile}
           />
         )}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
+        <h1 onClick={() => window.location.reload()} className="cursor-pointer absolute left-1/2 -translate-x-1/2 text-xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
           <img src="/mountain.svg" className="h-[1.2rem] w-auto inline-block align-baseline bring-up-1" />
           Ridgeline
         </h1>
@@ -196,7 +196,7 @@ export default function Sidebar({
         }
       >
         <div className="sidebar-top shrink-0 h-14 flex items-center justify-center max-[768px]:hidden relative z-20">
-          <h1 className="text-2xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
+          <h1 onClick={() => window.location.reload()} className="cursor-pointer text-2xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
             R
             <img src="/mountain.svg" alt="" className="h-[0.9em] w-auto inline-block align-baseline" aria-hidden />
             dgeline
