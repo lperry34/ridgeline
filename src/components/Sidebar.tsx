@@ -77,7 +77,9 @@ export default function Sidebar({
   }, []);
 
   function closeSidebarOnMobile() {
-    setSidebarOpen(false);
+    if (window.innerWidth <= 768) {
+      setSidebarOpen(false);
+    }
   }
 
   function handleSelectResult(result: GeocoderService.Result) {
@@ -349,6 +351,7 @@ export default function Sidebar({
                   onClick={() => {
                   routeApiRef.current?.clearRoute();
                   closeSidebarOnMobile();
+                  setIsDrawing(false);
                 }}
                 >
                   Clear route
