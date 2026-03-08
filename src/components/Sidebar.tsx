@@ -89,8 +89,6 @@ export default function Sidebar({
     setShowDropdown(false);
   }
 
-  const sidebarOpenClass = sidebarOpen ? '' : 'hidden'
-
   return (
     <>
       <header className="app-header fixed top-0 left-0 right-0 h-14 z-50 flex items-center border-b border-white/15 bg-[#181818] min-[769px]:hidden">
@@ -140,14 +138,50 @@ export default function Sidebar({
         </button>
       </div>
       <div
-        className={`
-          sidebar flex flex-col bg-[#0f0f0f] border-r border-white/15
-          min-[768px]:max-w-100 min-[768px]:min-w-85 min-[768px]:shrink-0 min-[768px]:h-screen
-          min-[768px]:max-[1400px]:min-w-80 min-[768px]:max-[1450px]:w-80
-          max-[768px]:fixed max-[768px]:left-0 max-[768px]:top-14 max-[768px]:z-40 max-[768px]:w-80 max-[768px]:h-[calc(100vh-3.5rem)]
-          max-[1200px]:${sidebarOpenClass}
-          max-[768px]:${sidebarOpenClass}
-        `}
+        className={sidebarOpen
+          ? `
+          sidebar 
+          flex 
+          flex-col 
+          bg-[#0f0f0f] 
+          border-r 
+          border-white/15
+          min-[768px]:max-w-100 
+          min-[768px]:min-w-85 
+          min-[768px]:shrink-0 
+          min-[768px]:h-screen
+          min-[768px]:max-[1400px]:min-w-80 
+          min-[768px]:max-[1450px]:w-80
+          max-[768px]:fixed 
+          max-[768px]:left-0 
+          max-[768px]:top-14 
+          max-[768px]:z-40 
+          max-[768px]:w-80 
+          max-[768px]:h-[calc(100vh-3.5rem)]
+          `
+          : `
+          sidebar 
+          flex 
+          flex-col 
+          bg-[#0f0f0f] 
+          border-r 
+          border-white/15
+          min-[768px]:max-w-100 
+          min-[768px]:min-w-85 
+          min-[768px]:shrink-0 
+          min-[768px]:h-screen
+          min-[768px]:max-[1400px]:min-w-80 
+          min-[768px]:max-[1450px]:w-80
+          max-[768px]:fixed 
+          max-[768px]:left-0 
+          max-[768px]:top-14 
+          max-[768px]:z-40 
+          max-[768px]:w-80 
+          max-[768px]:h-[calc(100vh-3.5rem)]
+          max-[1200px]:hidden
+          max-[768px]:hidden
+          `
+        }
       >
         <div className="sidebar-top text-center shrink-0 max-[768px]:hidden">
           <h1 className="text-4xl font-bold text-center inline-flex items-center justify-center gap-0.5 max-[768px]:text-2xl">
@@ -207,7 +241,7 @@ export default function Sidebar({
                 </button>
               )}
               {searchLoading && (
-                <span className={`absolute top-1/2 -translate-y-1/2 text-white/50 text-xs ${searchQuery ? 'right-8' : 'right-3'}`}>Searching...</span>
+                <span className={searchQuery ? 'absolute top-1/2 -translate-y-1/2 text-white/50 text-xs right-8' : 'absolute top-1/2 -translate-y-1/2 text-white/50 text-xs right-3'}>Searching...</span>
               )}
             </div>
             {showDropdown && searchResults.length > 0 && (
@@ -245,22 +279,40 @@ export default function Sidebar({
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
-                className={`
-                  ${isDrawing ? 'cursor-crosshair' : 'cursor-pointer'} 
-                  inline-flex 
-                  items-center 
-                  gap-2 
-                  px-3 
-                  py-2 
-                  text-sm 
-                  text-white/90 
-                  rounded-md 
-                  bg-white/[0.06] 
-                  hover:bg-white/10 
-                  transition-colors 
-                  flex-1 
-                  min-w-0 
-                  justify-center`}
+                className={isDrawing
+                  ? `
+                  cursor-crosshair
+                  inline-flex
+                  items-center
+                  gap-2
+                  px-3
+                  py-2
+                  text-sm
+                  text-white/90
+                  rounded-md
+                  bg-white/[0.06]
+                  hover:bg-white/10
+                  transition-colors
+                  flex-1
+                  min-w-0
+                  justify-center`
+                  : `
+                  cursor-pointer
+                  inline-flex
+                  items-center
+                  gap-2
+                  px-3
+                  py-2
+                  text-sm
+                  text-white/90
+                  rounded-md
+                  bg-white/[0.06]
+                  hover:bg-white/10
+                  transition-colors
+                  flex-1
+                  min-w-0
+                  justify-center`
+                }
                 onClick={() => setIsDrawing(!isDrawing)}
               >
                 {isDrawing ? 'Exit route mode' : 'Create your route'}
@@ -330,7 +382,7 @@ export default function Sidebar({
               onClick={() => setControlsExpanded((e) => !e)}
             >
               <span>Controls</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${controlsExpanded ? 'rotate-180' : ''}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={controlsExpanded ? 'transition-transform rotate-180' : 'transition-transform'}>
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
