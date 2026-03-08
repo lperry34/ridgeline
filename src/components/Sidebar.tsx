@@ -195,7 +195,7 @@ export default function Sidebar({
           `
         }
       >
-        <div className="sidebar-top shrink-0 h-14 flex items-center justify-center max-[768px]:hidden relative z-20">
+        <div className="sidebar-top shrink-0 h-14 flex items-center justify-center max-[768px]:hidden max-[1200px]:border-b border-white/15 relative z-20">
           <h1 onClick={() => window.location.reload()} className="cursor-pointer text-2xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
             R
             <img src="/mountain.svg" alt="" className="h-[0.9em] w-auto inline-block align-baseline" aria-hidden />

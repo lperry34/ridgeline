@@ -121,7 +121,7 @@ export default function Terrain({
     <div className="relative w-full h-full">
       {!isReady && (
         <div
-          className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 bg-[#0f0f0f]"
+          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#0f0f0f]"
         >
           <div className="terrain-loader" />
           <span className="text-sm text-white/60">Loading map…</span>
