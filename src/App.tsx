@@ -13,7 +13,21 @@ function App() {
 
   return (
     <>
-    <div className="flex">
+    <div className="relative flex min-h-screen">
+      <header
+        className="
+        app-top-bar 
+        pointer-events-none 
+        hidden min-[1200px]:block 
+        absolute 
+        top-0 
+        left-0 
+        right-0 
+        h-14 z-10 
+        border-b 
+        border-white/15 
+        bg-[#0f0f0f]"
+      />
       <Sidebar 
         isDrawing={isDrawing} 
         setIsDrawing={setIsDrawing} 

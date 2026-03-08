@@ -1,6 +1,6 @@
 # Ridgeline
 
-Plan summit routes and explore open world terrain in stunning 3D. Built with React, Cesium, and Resium.
+Plan mountaineering routes and explore open world terrain in stunning 3D. Built with React, Cesium, and Resium.
 
 ## What it does
 

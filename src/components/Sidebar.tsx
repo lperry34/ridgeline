@@ -76,11 +76,16 @@ export default function Sidebar({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  function closeSidebarOnMobile() {
+    setSidebarOpen(false);
+  }
+
   function handleSelectResult(result: GeocoderService.Result) {
     viewerApiRef.current?.flyTo(result.destination);
     skipNextDropdownOpenRef.current = true;
     setShowDropdown(false);
     setSearchQuery(result.displayName);
+    closeSidebarOnMobile();
   }
 
   function handleClearSearch() {
@@ -103,10 +108,15 @@ export default function Sidebar({
             </svg>
           )}
         </button>
+        {sidebarOpen && (
+          <div
+            className="fixed top-14 left-80 right-0 bottom-0 z-30 hidden max-[768px]:block"
+            onClick={closeSidebarOnMobile}
+          />
+        )}
         <h1 className="absolute left-1/2 -translate-x-1/2 text-xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
-          R
-          <img src="/mountain.svg" className="h-[1.2rem] w-auto inline-block align-baseline" />
-          dgeline
+          <img src="/mountain.svg" className="h-[1.2rem] w-auto inline-block align-baseline bring-up-1" />
+          Ridgeline
         </h1>
       </header>
 
@@ -183,15 +193,15 @@ export default function Sidebar({
           `
         }
       >
-        <div className="sidebar-top text-center shrink-0 max-[768px]:hidden">
-          <h1 className="text-4xl font-bold text-center inline-flex items-center justify-center gap-0.5 max-[768px]:text-2xl">
+        <div className="sidebar-top shrink-0 h-14 flex items-center justify-center max-[768px]:hidden relative z-20">
+          <h1 className="text-2xl font-bold inline-flex items-center justify-center gap-0.5 text-white">
             R
             <img src="/mountain.svg" alt="" className="h-[0.9em] w-auto inline-block align-baseline" aria-hidden />
             dgeline
           </h1>
         </div>
         <div className="sidebar-content flex-1 flex flex-col min-h-0 overflow-auto">
-          <section ref={searchContainerRef} className="relative" aria-label="Search">
+          <div ref={searchContainerRef} className="relative" aria-label="Search">
             <label className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5">Search</label>
             <div className="relative">
               <input
@@ -272,9 +282,9 @@ export default function Sidebar({
                 ))}
               </ul>
             )}
-          </section>
+          </div>
 
-          <section className="mt-6" aria-label="Route">
+          <div className="mt-6" aria-label="Route">
             <h2 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2">Route</h2>
             <div className="flex flex-wrap gap-2">
               <button
@@ -313,7 +323,10 @@ export default function Sidebar({
                   min-w-0
                   justify-center`
                 }
-                onClick={() => setIsDrawing(!isDrawing)}
+                onClick={() => {
+                  setIsDrawing(!isDrawing);
+                  closeSidebarOnMobile();
+                }}
               >
                 {isDrawing ? 'Exit route mode' : 'Create your route'}
               </button>
@@ -333,7 +346,10 @@ export default function Sidebar({
                   hover:bg-white/5 
                   transition-colors 
                   shrink-0"
-                  onClick={() => routeApiRef.current?.clearRoute()}
+                  onClick={() => {
+                  routeApiRef.current?.clearRoute();
+                  closeSidebarOnMobile();
+                }}
                 >
                   Clear route
                 </button>
@@ -354,13 +370,16 @@ export default function Sidebar({
                 </div>
               </dl>
             )}
-          </section>
+          </div>
         </div>
         <div className="sidebar-bottom shrink-0 pt-4 pb-4 px-4 border-t border-white/15">
           <button
             type="button"
             className="cursor-pointer gap-2 py-2 text-sm text-white/70 mb-2 hover:underline w-full text-left"
-            onClick={() => typeof viewerApiRef.current?.flyHome === 'function' && viewerApiRef.current.flyHome()}
+            onClick={() => {
+              if (typeof viewerApiRef.current?.flyHome === 'function') viewerApiRef.current.flyHome();
+              closeSidebarOnMobile();
+            }}
           >
             Zoom out to global
           </button>
