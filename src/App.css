@@ -63,10 +63,6 @@
   padding: 1rem;
 }
 
-.bring-up-1 {
-  transform: translateY(-0.5px);
-}
-
 .terrain-loader {
   width: 32px;
   height: 32px;
